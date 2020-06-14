@@ -7,10 +7,10 @@ resource "null_resource" "depends_on" {
 resource "aws_alb_target_group" "alb_target_group_terraform" {
     count                   = var.alb_target_group_count
     depends_on              = [null_resource.depends_on]
-    name                    = var.alb_target_group_
-    port                    = var.alb_target_group_
-    protocol                = var.alb_target_group_
-    vpc_id                  = var.alb_target_group_
+    name                    = var.alb_target_group_name
+    port                    = var.alb_target_group_port
+    protocol                = var.alb_target_group_protocol
+    vpc_id                  = var.alb_target_group_vpc_id
     stickiness {
         type                = var.alb_target_group_stickiness_type
         cookie_duration     = var.alb_target_group_stickiness_cookie_duration
@@ -22,7 +22,7 @@ resource "aws_alb_target_group" "alb_target_group_terraform" {
         timeout             = var.alb_target_group_health_check_timeout
         interval            = var.alb_target_group_health_check_interval
         matcher             = var.alb_target_group_health_check_matcher
-        protocol            = var.alb_target_group_health_check_protocol
+        protocol            = var.alb_target_group_protocol
     }
     tag                     = local.tags
 }
